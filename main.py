@@ -1,6 +1,9 @@
 from PyQt5.QtWidgets import QSlider, QLabel, QDoubleSpinBox, QSpinBox
+from PyQt5.QtGui import QPixmap
 from PyQt5 import QtWidgets, uic 
 import sys 
+import numpy as np
+import matplotlib.pyplot as plt
 
 class Ui(QtWidgets.QMainWindow):
   def __init__(self):
@@ -24,7 +27,7 @@ class Ui(QtWidgets.QMainWindow):
     self.setTempM = self.findChild(QSpinBox, "setTempM")
 
     self.sliderDlugoscOdcinka.valueChanged.connect(self.dlugosc_changed)
-    self.iloscWezlowSlider.valueChanged.connect(self.number_changed)
+    self.iloscWezlowSlider.valueChanged.connect(self.wezly_changed)
     self.krokCzasowy.valueChanged.connect(self.doKrok)
     self.konczowyCzasObl.valueChanged.connect(self.doCzasObl)
 
@@ -51,9 +54,34 @@ class Ui(QtWidgets.QMainWindow):
     new_value = str(self.dlugoscOdcinkaSlider.value())
     self.labelDlugoscOdcinka.setText(new_value)
 
-  def number_changed(self):
+  def wezly_changed(self):
     new_value = str(self.iloscWezlowSlider.value())
     self.labelloscWezlow.setText(new_value)
+
+    a = self.iloscWezlowSlider.value()
+    b = self.heightNodesInput.text()
+
+    if a != '':
+      try:
+        a = int(a)
+        
+        if 2 < a < 21 :
+            n_x = 500 // (int(a) - 1)
+            # n_y = 300 // (int(b) - 1)
+
+            grid = np.ones((301, 111)) * 255 # make blank pic 
+
+            grid[::][::n_x] = 0
+            grid = grid.T
+            # grid[::][::n_y] = 0
+            # grid = grid.T
+
+            img_path = 'test.png'
+            plt.imsave(img_path, grid, cmap='gray', vmin=0, vmax=255)
+
+            self.imageLabel.setPixmap(QPixmap(img_path))
+      except Exception as ex:
+          print(ex)    
   
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>653</width>
-    <height>538</height>
+    <height>527</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -224,7 +224,7 @@
      <double>0.100000000000000</double>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="koncowyCzasDoubleSpinBox_2">
+   <widget class="QDoubleSpinBox" name="koncowyCzasDoubleSpinBox">
     <property name="geometry">
      <rect>
       <x>220</x>

@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QSlider, QLabel, QDoubleSpinBox, QSpinBox
+from PyQt5.QtWidgets import QSlider, QLabel, QDoubleSpinBox, QSpinBox, QPushButton
 from PyQt5.QtGui import QPixmap
 from PyQt5 import QtWidgets, uic 
 import sys 
@@ -13,6 +13,11 @@ class Ui(QtWidgets.QMainWindow):
     self.setFixedSize(653, 527)
     self.show()
     self.ui = Ui
+
+    self.imageLabel = self.findChild(QLabel, "imageLabel")
+
+    self.countButton = self.findChild(QPushButton, "pushButton")
+    self.countButton.clicked.connect(self.buttonEvent)
 
     self.sliderDlugoscOdcinka = self.findChild(QSlider, "dlugoscOdcinkaSlider")
     self.labelDlugoscOdcinka = self.findChild(QLabel, "labelDlugoscOdcinka")
@@ -45,10 +50,10 @@ class Ui(QtWidgets.QMainWindow):
     print(f"Temperatura na lewym końcu wynosi: {self.setTempL.value()}")
 
   def doSetTempP(self):
-    print(f"Temperatura na lewym końcu wynosi: {self.setTempP.value()}")
+    print(f"Temperatura na prawym końcu wynosi: {self.setTempP.value()}")
 
   def doSetTempM(self):
-    print(f"Temperatura na lewym końcu wynosi: {self.setTempM.value()}")
+    print(f"Temperatura na środku wynosi: {self.setTempM.value()}")
 
   def dlugosc_changed(self):
     new_value = str(self.dlugoscOdcinkaSlider.value())
@@ -58,27 +63,27 @@ class Ui(QtWidgets.QMainWindow):
     new_value = str(self.iloscWezlowSlider.value())
     self.labelloscWezlow.setText(new_value)
 
+  def buttonEvent(self):
+    """here I put all stuff to count, after clicked"""
+
+ 
+    print("button works")
+  
+
+
     a = self.iloscWezlowSlider.value()
-    b = self.heightNodesInput.text()
+    # b = self.heightNodesInput.text()
 
     if a != '':
       try:
-        a = int(a)
-        
-        if 2 < a < 21 :
-            n_x = 500 // (int(a) - 1)
-            # n_y = 300 // (int(b) - 1)
-
-            grid = np.ones((301, 111)) * 255 # make blank pic 
-
+        a = int(a)    
+        if 2 < a < 51 :
+            n_x = 291 // (int(a) - 1)
+            grid = np.ones((291, 111)) * 255 # make blank pic 
             grid[::][::n_x] = 0
             grid = grid.T
-            # grid[::][::n_y] = 0
-            # grid = grid.T
-
             img_path = 'test.png'
             plt.imsave(img_path, grid, cmap='gray', vmin=0, vmax=255)
-
             self.imageLabel.setPixmap(QPixmap(img_path))
       except Exception as ex:
           print(ex)    

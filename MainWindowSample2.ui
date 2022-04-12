@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
+    <width>665</width>
     <height>527</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Projekt symulacja podgrzewania - Sadkowski</string>
+   <string>Projekt symulacja podgrzewania MRS 1D</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -103,6 +103,9 @@
     <property name="maximum">
      <number>50</number>
     </property>
+    <property name="sliderPosition">
+     <number>3</number>
+    </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
@@ -110,24 +113,14 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>240</y>
-      <width>151</width>
+      <x>190</x>
+      <y>250</y>
+      <width>301</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Temperatura początkowa</string>
-    </property>
-   </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>280</y>
-      <width>351</width>
-      <height>141</height>
-     </rect>
+     <string>Ustal temperaturę początkową trzech punktów</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">
@@ -153,7 +146,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>0</string>
+     <string>1</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelloscWezlow">
@@ -166,7 +159,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>0</string>
+     <string>3</string>
     </property>
    </widget>
    <widget class="QSpinBox" name="setTempL">
@@ -253,13 +246,26 @@
      <string>Oblicz</string>
     </property>
    </widget>
+   <widget class="QLabel" name="imageLabel">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>290</y>
+      <width>291</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>653</width>
+     <width>665</width>
      <height>26</height>
     </rect>
    </property>

@@ -1,0 +1,56 @@
+import numpy
+from matplotlib import pyplot 
+
+# dlugosc, wezly, czas, czas_step, left_temp, initial_temp, right_temp
+
+def makeSimulation(s_B, dx, t_sim, dt, l_temp, T_A):
+  pass
+  # Geometry of object 
+  # s_B = 0.5           # m
+
+  # Spatial grid 
+  # dx = 0.01           # m
+  nx = int(s_B/dx)+1
+  x = numpy.linspace(0, s_B, nx) # line
+
+  # Time grid 
+  # t_sim = 300         # s all
+  # dt = 0.5            # s step
+  nt = int(t_sim/dt)
+
+  # Material properties 
+  rho = 2000          # kg/m^3 
+  cp = 500            # J/kg/K
+  lamda = 1           # W/m/K
+
+  # Initial condition 
+  # T_A = 293.15        # Kelvin temp
+
+  # Define Result 
+  T = numpy.ones(nx)*T_A  # finall grid 
+
+  # Simulation
+  for n in range(1,nt):
+    Tn = T.copy()
+
+    T[1:-1] = Tn[1:-1] + dt * lamda/(rho*cp) * (Tn[2:] - 2*Tn[1:-1]+ Tn[0:-2])/dx**2
+
+    T[0] = l_temp
+    # T[0] = 273.15
+    T[-1] = T[-2]
+
+
+  pyplot.figure(figsize=(6,7), dpi=100)
+  pyplot.xlabel('Długość [M]')
+  pyplot.ylabel('Temperatura [C]')
+  pyplot.title('Nagrzewanie się elementu 1D')
+  pyplot.grid(True)
+  pyplot.plot(x,T-273.15,'k')
+  pyplot.show()
+
+# dlugosc, wezly, czas_all, czas_step, left_temp, initial_temp, right_temp
+# makeSimulation(0.5, 0.01, 300, 0.5, 273.15, 293.15)
+
+
+
+

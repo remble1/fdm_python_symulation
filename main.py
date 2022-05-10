@@ -4,6 +4,7 @@ from PyQt5 import QtWidgets, uic
 import sys 
 import numpy as np
 import matplotlib.pyplot as plt
+from simulation import makeSimulation
 
 class Ui(QtWidgets.QMainWindow):
   def __init__(self):
@@ -65,8 +66,13 @@ class Ui(QtWidgets.QMainWindow):
 
   def buttonEvent(self):
     """here I put all stuff to count, after clicked"""
-
- 
+    dlugoscOdcinka = float(self.dlugoscOdcinkaSlider.value())/10
+    iloscWezlow = float(self.iloscWezlowSlider.value())
+    czasObliczen = float(self.konczowyCzasObl.value())
+    krokObliczen = float(self.krokCzasowy.value())
+    nodeTempL = float(self.setTempL.value())
+    nodeTempInit = float(self.setTempM.value())
+    nodeTempR = float(self.setTempP.value())
     print("button works")
   
 
@@ -94,12 +100,12 @@ class Ui(QtWidgets.QMainWindow):
         empty.append(1)
       return empty
 
-    czasObliczen = float(self.konczowyCzasObl.value())
-    krokObliczen = float(self.krokCzasowy.value())
+
+    
     # print(krokObliczen)
     # print(self.dlugoscOdcinkaSlider.value(), "dlugosc odcinka slider")
     # print(self.iloscWezlowSlider.value(), "ilosc wezlow slider")
-    step = ((self.dlugoscOdcinkaSlider.value())/(self.iloscWezlowSlider.value()-1))
+    step = ((dlugoscOdcinka)/(iloscWezlow-1))
     t = np.arange(0.0, (self.dlugoscOdcinkaSlider.value()+1), step)
     
     s = makeList(len(t))
@@ -107,17 +113,22 @@ class Ui(QtWidgets.QMainWindow):
     s[0] = self.setTempL.value()
     s[-1] = self.setTempP.value()
 
-    fig, ax = plt.subplots()
-    ax.plot(t, s)
+    # fig, ax = plt.subplots()
+    # ax.plot(t, s)
 
-    ax.set(xlabel='Długość (m)', ylabel='temperatura (K)',
-          title='Wykres nagrzewania się elementu 1D')
-    ax.grid()
+    # ax.set(xlabel='Długość (m)', ylabel='temperatura (K)',
+    #       title='Wykres nagrzewania się elementu 1D')
+    # ax.grid()
 
 
 
-    fig.savefig("test.png")
-    plt.show()
+    # fig.savefig("test.png")
+    # plt.show()
+
+    #               dlugosc,       step, czas_all,      czas_step,  left_temp = 273.15, initial_temp = 293.15, right_temp
+    makeSimulation(dlugoscOdcinka, step, czasObliczen, krokObliczen, nodeTempL, nodeTempInit)
+
+    # makeSimulation(0.5, 0.01, 300, 0.5, 273.15, 293.15)
 
 
 app = QtWidgets.QApplication(sys.argv)

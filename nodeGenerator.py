@@ -1,2 +1,0 @@
-def node(nodenmber): 
-  pass

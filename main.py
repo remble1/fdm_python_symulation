@@ -87,7 +87,39 @@ class Ui(QtWidgets.QMainWindow):
             self.imageLabel.setPixmap(QPixmap(img_path))
       except Exception as ex:
           print(ex)    
-  
+
+    def makeList(node):
+      empty = []
+      for i in range(0, node):
+        empty.append(1)
+      return empty
+
+    czasObliczen = float(self.konczowyCzasObl.value())
+    krokObliczen = float(self.krokCzasowy.value())
+    # print(krokObliczen)
+    # print(self.dlugoscOdcinkaSlider.value(), "dlugosc odcinka slider")
+    # print(self.iloscWezlowSlider.value(), "ilosc wezlow slider")
+    step = ((self.dlugoscOdcinkaSlider.value())/(self.iloscWezlowSlider.value()-1))
+    t = np.arange(0.0, (self.dlugoscOdcinkaSlider.value()+1), step)
+    
+    s = makeList(len(t))
+    # print(step)
+    s[0] = self.setTempL.value()
+    s[-1] = self.setTempP.value()
+
+    fig, ax = plt.subplots()
+    ax.plot(t, s)
+
+    ax.set(xlabel='Długość (m)', ylabel='temperatura (K)',
+          title='Wykres nagrzewania się elementu 1D')
+    ax.grid()
+
+
+
+    fig.savefig("test.png")
+    plt.show()
+
+
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
 app.exec_()

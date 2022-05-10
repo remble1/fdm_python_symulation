@@ -3,7 +3,7 @@ from matplotlib import pyplot
 
 # dlugosc, wezly, czas, czas_step, left_temp, initial_temp, right_temp
 
-def makeSimulation(s_B, dx, t_sim, dt, l_temp, T_A):
+def makeSimulation(s_B, dx, t_sim, dt, l_temp, T_A, p_temp):
   pass
   # Geometry of object 
   # s_B = 0.5           # m
@@ -36,6 +36,7 @@ def makeSimulation(s_B, dx, t_sim, dt, l_temp, T_A):
     T[1:-1] = Tn[1:-1] + dt * lamda/(rho*cp) * (Tn[2:] - 2*Tn[1:-1]+ Tn[0:-2])/dx**2
 
     T[0] = l_temp
+    
     # T[0] = 273.15
     T[-1] = T[-2]
 

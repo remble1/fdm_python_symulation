@@ -10,7 +10,7 @@ class Ui(QtWidgets.QMainWindow):
   def __init__(self):
     super(Ui, self).__init__()
 
-    uic.loadUi('D:\program_pola\MainWindowSample2.ui', self)
+    uic.loadUi('D:\program_pola\MainWindowSample3.ui', self)
     self.setFixedSize(653, 527)
     self.show()
     self.ui = Ui
@@ -57,8 +57,8 @@ class Ui(QtWidgets.QMainWindow):
     print(f"Temperatura na środku wynosi: {self.setTempM.value()}")
 
   def dlugosc_changed(self):
-    new_value = str(self.dlugoscOdcinkaSlider.value())
-    self.labelDlugoscOdcinka.setText(new_value)
+    new_value = str(self.dlugoscOdcinkaSlider.value()*10)
+    self.labelDlugoscOdcinka.setText(f"{new_value} cm")
 
   def wezly_changed(self):
     new_value = str(self.iloscWezlowSlider.value())
@@ -126,7 +126,7 @@ class Ui(QtWidgets.QMainWindow):
     # plt.show()
 
     #               dlugosc,       step, czas_all,      czas_step,  left_temp = 273.15, initial_temp = 293.15, right_temp
-    makeSimulation(dlugoscOdcinka, step, czasObliczen, krokObliczen, nodeTempL, nodeTempInit)
+    makeSimulation(dlugoscOdcinka, step, czasObliczen, krokObliczen, nodeTempL, nodeTempInit, nodeTempR)
 
     # makeSimulation(0.5, 0.01, 300, 0.5, 273.15, 293.15)
 

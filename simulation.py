@@ -28,17 +28,24 @@ def makeSimulation(s_B, dx, t_sim, dt, l_temp, T_A, p_temp):
 
   # Define Result 
   T = numpy.ones(nx)*T_A  # finall grid 
+  T[0] = l_temp
+  T[-1] = p_temp
 
   # Simulation
   for n in range(1,nt):
-    Tn = T.copy()
+    # Tn = T.copy()
 
-    T[1:-1] = Tn[1:-1] + dt * lamda/(rho*cp) * (Tn[2:] - 2*Tn[1:-1]+ Tn[0:-2])/dx**2
+    for i in range(1, len(T)-1):
+      T[i] = T[i] + dt * lamda/(rho*cp) * ((T[i+1]-2*T[i]+T[i-1])/dx**2)
 
-    T[0] = l_temp
-    
+
+    # T[1:-1] = Tn[1:-1] + dt * lamda/(rho*cp) * (Tn[2:] - 2*Tn[1:-1]+ Tn[0:-2])/dx**2
+
+
+    # T[0] = l_temp
+    # T[-1] = 270
     # T[0] = 273.15
-    T[-1] = T[-2]
+    # T[-1] = T[-2]
 
 
   pyplot.figure(figsize=(6,7), dpi=100)

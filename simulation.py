@@ -1,7 +1,7 @@
 import numpy
-from matplotlib import pyplot 
+from matplotlib import pyplot as plt
 
-# dlugosc, wezly, czas, czas_step, left_temp, initial_temp, right_temp
+# length, number_of_nodes, time, time_step, left_temp, initial_temp, right_temp
 
 def makeSimulation(s_B, dx, t_sim, dt, l_temp, T_A, p_temp):
   pass
@@ -48,16 +48,14 @@ def makeSimulation(s_B, dx, t_sim, dt, l_temp, T_A, p_temp):
     # T[-1] = T[-2]
 
 
-  pyplot.figure(figsize=(6,7), dpi=100)
-  pyplot.xlabel('Długość [M]')
-  pyplot.ylabel('Temperatura [C]')
-  pyplot.title('Nagrzewanie się elementu 1D')
-  pyplot.grid(True)
-  pyplot.plot(x,T-273.15,'k')
-  pyplot.show()
+  plt.figure(figsize=(6,7), dpi=100)
+  plt.xlabel('Długość [cm]')
+  plt.ylabel('Temperatura [K]')
+  plt.title('Nagrzewanie się elementu 1D')
+  plt.grid(True)
+  plt.plot(x,T,'k')
+  plt.show()
 
-# dlugosc, wezly, czas_all, czas_step, left_temp, initial_temp, right_temp
-# makeSimulation(0.5, 0.01, 300, 0.5, 273.15, 293.15)
 
 
 

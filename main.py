@@ -1,10 +1,11 @@
 from PyQt5.QtWidgets import QSlider, QLabel, QDoubleSpinBox, QSpinBox, QPushButton
 from PyQt5.QtGui import QPixmap
-from PyQt5 import QtWidgets, uic 
+from PyQt5 import QtWidgets, uic, QtGui
 import sys 
 import numpy as np
 import matplotlib.pyplot as plt
 from simulation import makeSimulation
+# from PySide2.QtGui import QIcon
 
 class Ui(QtWidgets.QMainWindow):
   def __init__(self):
@@ -14,7 +15,9 @@ class Ui(QtWidgets.QMainWindow):
     self.setFixedSize(653, 527)
     self.show()
     self.ui = Ui
+    self.setWindowIcon(QtGui.QIcon('icons/duckicon.png')) 
 
+    self.labelWarning = self.findChild(QLabel, "label_warning")
     self.imageLabel = self.findChild(QLabel, "imageLabel")
 
     self.countButton = self.findChild(QPushButton, "pushButton")
@@ -54,7 +57,7 @@ class Ui(QtWidgets.QMainWindow):
     print(f"Temperatura na prawym końcu wynosi: {self.setTempP.value()}")
 
   def doSetTempM(self):
-    print(f"Temperatura na środku wynosi: {self.setTempM.value()}")
+    print(f"Temperatura całego drutu wynosi: {self.setTempM.value()}")
 
   def dlugosc_changed(self):
     new_value = str(self.dlugoscOdcinkaSlider.value()*10)
@@ -65,7 +68,7 @@ class Ui(QtWidgets.QMainWindow):
     self.labelloscWezlow.setText(new_value)
 
   def buttonEvent(self):
-    """here I put all stuff to count, after clicked"""
+    """here is all stuff to count, after clicked"""
     dlugoscOdcinka = float(self.dlugoscOdcinkaSlider.value())/10
     iloscWezlow = float(self.iloscWezlowSlider.value())
     czasObliczen = float(self.konczowyCzasObl.value())
@@ -73,62 +76,33 @@ class Ui(QtWidgets.QMainWindow):
     nodeTempL = float(self.setTempL.value())
     nodeTempInit = float(self.setTempM.value())
     nodeTempR = float(self.setTempP.value())
-    print("button works")
   
-
-
     a = self.iloscWezlowSlider.value()
-    # b = self.heightNodesInput.text()
 
     if a != '':
       try:
         a = int(a)    
         if 2 < a < 51 :
             n_x = 291 // (int(a) - 1)
-            grid = np.ones((291, 111)) * 255 # make blank pic 
+            grid = np.ones((291, 111)) * 255 # make white blank pic 
             grid[::][::n_x] = 0
             grid = grid.T
-            img_path = 'test.png'
+            img_path = 'icons/test.png'
             plt.imsave(img_path, grid, cmap='gray', vmin=0, vmax=255)
             self.imageLabel.setPixmap(QPixmap(img_path))
       except Exception as ex:
           print(ex)    
 
-    def makeList(node):
-      empty = []
-      for i in range(0, node):
-        empty.append(1)
-      return empty
+    if czasObliczen and krokObliczen != 0:
+      self.labelWarning.setText(f"")
+      step = ((dlugoscOdcinka)/(iloscWezlow-1))
 
+      #               dlugosc,       step, czas_all,      czas_step,  left_temp = 273.15, initial_temp = 293.15, right_temp
+      makeSimulation(dlugoscOdcinka, step, czasObliczen, krokObliczen, nodeTempL, nodeTempInit, nodeTempR)
 
-    
-    # print(krokObliczen)
-    # print(self.dlugoscOdcinkaSlider.value(), "dlugosc odcinka slider")
-    # print(self.iloscWezlowSlider.value(), "ilosc wezlow slider")
-    step = ((dlugoscOdcinka)/(iloscWezlow-1))
-    t = np.arange(0.0, (self.dlugoscOdcinkaSlider.value()+1), step)
-    
-    s = makeList(len(t))
-    # print(step)
-    s[0] = self.setTempL.value()
-    s[-1] = self.setTempP.value()
+    else: 
+      self.labelWarning.setText(f"Krok czasowy ani czas obliczeń nie może wynosić zero.")
 
-    # fig, ax = plt.subplots()
-    # ax.plot(t, s)
-
-    # ax.set(xlabel='Długość (m)', ylabel='temperatura (K)',
-    #       title='Wykres nagrzewania się elementu 1D')
-    # ax.grid()
-
-
-
-    # fig.savefig("test.png")
-    # plt.show()
-
-    #               dlugosc,       step, czas_all,      czas_step,  left_temp = 273.15, initial_temp = 293.15, right_temp
-    makeSimulation(dlugoscOdcinka, step, czasObliczen, krokObliczen, nodeTempL, nodeTempInit, nodeTempR)
-
-    # makeSimulation(0.5, 0.01, 300, 0.5, 273.15, 293.15)
 
 
 app = QtWidgets.QApplication(sys.argv)

@@ -1,0 +1,7 @@
+python-dotenv == 0.20.0
+qt5-applications == 5.15.2.2.2
+qt5-tools == 5.15.2.1.2
+setuptools == 60.9.3
+six == 1.16.0
+wheel == 0.37.1
+matplotlib == 3.5.1

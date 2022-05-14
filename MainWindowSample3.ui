@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Projekt symulacja podgrzewania MRS 1D</string>
+   <string>Symulacja podgrzewania obiektu 1D - MRS</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -113,7 +113,7 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>220</x>
       <y>250</y>
       <width>301</width>
       <height>16</height>
@@ -263,7 +263,7 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>140</y>
+      <y>143</y>
       <width>55</width>
       <height>16</height>
      </rect>
@@ -276,13 +276,65 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>180</y>
+      <y>183</y>
       <width>55</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string>s</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_warning">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>220</y>
+      <width>391</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>343</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>K</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>440</y>
+      <width>22</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>K</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>343</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>K</string>
     </property>
    </widget>
   </widget>
